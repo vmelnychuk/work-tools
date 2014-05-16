@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Get Document Tool</title>
+        <link rel="icon" type="image/png" href="img/icon.png" />
+    </head>
+    <body>
+        <h2>Enter url from env</h2>
+        <form name="tool" id="tool">
+            <p>
+                <span>URL</span>
+                <br/>
+                <textarea name="url" id="url" cols="120" rows="8" autofocus required></textarea>
+            </p>
+            <p>
+                <input type="submit" value="Get Link" id="get_link"/>
+                <input type="reset" value="Clear" id="clear" />
+            </p>
+        </form>
+        <table id="output">
+            <tr>
+                <td>
+                    xml
+                </td>
+                <td id="xml" />
+            </tr>
+            <tr>
+                <td>
+                    relocation xml
+                </td>
+                <td id="relocation_xml" />
+            </tr>
+        </table>
+        <script type="text/javascript">
+        var constants = {
+            atlasInterchange: "http://DOMAIN/document-service-webapp/atlas-document/(DOC_ID).DOC_TYPE?preprocessing=none&AtlasTicket=TICKET_ID",
+            relocated: "http://DOMAIN/document-service-webapp/wkusdefault/atlas-annotated-document/(DOC_ID).DOC_TYPE?AtlasTicket=TICKET_ID"
+        }
+        var eventsHandler = {
+            getUrlFieldFocus: function(ev) {
+                document.getElementById('url').focus(); 
+            },
+            getUrls: function(ev) {
+                var form = document.getElementById("tool");
+                var url = form["url"].value;
+                if (!url) {
+                    alert('Fill the URL text area');
+                    return false;
+                }
+                url = url.replace("view-source:", "");
+                
+                var domain_find = new RegExp("http://")
+/*
+                cells[i].innerHTML = '';
+                tempLink = document.createElement('a');
+                tempLink.href = currentURL;
+                tempLink.target = '_blank';
+                tempLink.innerHTML = currentURL;
+                cells[i].appendChild(tempLink);
+*/
+            }
+        };
+        //set event handler for clear
+        (function() {
+            var clear = document.getElementById("clear");
+            clear.addEventListener("click", eventsHandler.getUrlFieldFocus, false);
+        })();
+        //set event handler for get_link
+        (function() {
+            var getLink = document.getElementById("get_link");
+            getLink.addEventListener("click", eventsHandler.getUrls, false);
+        })();
+        </script>
+    </body>
+</html>

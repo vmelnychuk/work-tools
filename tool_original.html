@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>CF Tool</title>
+    </head>
+    <body>
+        <h2>Enter the directory and doc-id, please</h2>
+        <form name="tool" method="post" action="tool.html" id="tool">
+            <p>
+                <span>pub-dir</span>
+                <br/>
+                <input name="pub-dir" type="text" size="60"/>
+            </p>
+            <p>
+                <span>doc-id</span>
+                <br/>
+                <input name="doc-id" type="text" size="60"/>
+            </p>
+            <p>
+                <span>doc-in-focus</span>
+                <br/>
+                <input name="doc-in-focus" type="text" size="60"/>
+            </p>
+            <p>
+                <input type="submit" value="Get"/>
+                <input type="reset" value="Clear"/>
+            </p>
+        </form>
+        <table id="output">
+		    <tr>
+                <td>
+                    Relocation xml
+                </td>
+                <td id="xml"/>
+            </tr>
+            <tr>
+                <td>
+                    HTML view
+                </td>
+                <td id="html"/>
+            </tr>
+            <tr>
+                <td>
+                    PDF view
+                </td>
+                <td id="pdf"/>
+            </tr>
+            <tr>
+                <td>
+                    RTF view
+                </td>
+                <td id="rtf"/>
+            </tr>
+            <tr>
+                <td>
+                    Mail view
+                </td>
+                <td id="html-mail"/>
+            </tr>
+            <tr>
+                <td>
+                    HTML print view
+                </td>
+                <td id="html-print"/>
+            </tr>
+            <tr>
+                <td>
+                    PDF print view
+                </td>
+                <td id="pdf-print"/>
+            </tr>
+            <tr>
+                <td>
+                    RTF print view
+                </td>
+                <td id="rtf-print"/>
+            </tr>
+        </table>
+        <script type="text/javascript">
+            (function () {
+                var form = document.getElementById('tool');
+                    
+                  
+                
+                form.onsubmit = function (e) {
+                    var pubDir = this['pub-dir'].value,
+                        docId = this['doc-id'].value.replace('.xml', ''),
+                        focusId = this['doc-in-focus'].value,
+                        output = document.getElementById('output'),
+                        cells = output.getElementsByTagName('td'),
+                        i,
+                        l,
+                        j,
+                        k,
+                        tokens,
+                        tempId,
+                        tempLink,
+                        currentURL,
+                        tempURL,
+                        URLstorage = '',
+						relocationBaseURL = 'http://localhost:8888/test/atlas-preprocessed-document/',
+                        baseURL = 'http://localhost:8888/test/documents/';
+						
+                        
+                    if (!pubDir || !docId) {
+                        alert('Fill the text area(s)');
+                        return false;
+                    }
+                        
+                    e.preventDefault();
+
+                    combinedId = docId.split(/\s/g);
+                    for (j = 0, k = combinedId.length; j < k; j++) {
+                        if (combinedId[j] != '') {
+                            tempURL = '(' + pubDir + '/' + combinedId[j] + ')';                        
+                            if (j+1 != k) {
+                                URLstorage += tempURL + ',';
+                            } else {
+                                URLstorage += tempURL;
+                            }
+                        }
+                    }
+                    
+                    for (i = 0, l = cells.length; i < l; i++) {
+                        tempId = cells[i].id;
+                        if (tempId) {
+                            tokens = tempId.split('-');
+							if(tempId.search("xml") != -1){
+							currentURL = relocationBaseURL + URLstorage + '.' + tokens[0];
+							} else {
+                            currentURL = baseURL + URLstorage + '.' + tokens[0];
+							}
+							
+                            if (focusId != '' && i == 1){
+                                currentURL += '?inFocusWkDocId=' + pubDir + '/' + focusId;
+                            }
+                            if (tokens[1]) {
+                                currentURL += '?action=' + tokens[1];
+                            }
+                            
+                            cells[i].innerHTML = '';
+                            tempLink = document.createElement('a');
+                            tempLink.href = currentURL;
+                            tempLink.target = '_blank';
+                            tempLink.innerHTML = currentURL;
+                            cells[i].appendChild(tempLink);
+                            
+                        }
+                    }
+                };
+            })();
+        </script>
+    </body>
+</html>
