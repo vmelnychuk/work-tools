@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>CF Info Tool</title>
+    </head>
+    <body>
+        <h2>Enter the GA host and doc-id, please</h2>
+        <form name="tool" method="post" action="CFInfoTool.html" id="tool">
+            <p>
+                <span>GA Host</span>
+                <br/>
+                <input name="ga-host" type="text" size="60"/>
+            </p>
+            <p>
+                <span>doc-id</span>
+                <br/>
+                <input name="doc-id" type="text" size="60"/>
+            </p>
+            <p>
+                <span>CF Id</span>
+                <br/>
+                <input name="cf-id" type="text" size="60"/>
+            </p>
+			<p>
+                <span>Atlas Ticket (optional)</span>
+                <br/>
+                <input name="atlas-ticket" type="text" size="60"/>
+            </p>
+            <p>
+                <input type="submit" value="Get"/>
+                <input type="reset" value="Clear"/>
+            </p>
+        </form>
+        <table id="output">
+		    <tr>
+                <td>
+                    Atlas Interchnage URL
+                </td>
+                <td id="aicURL"/>
+            </tr>
+            <tr>
+                <td>
+                    Relocated URL
+                </td>
+                <td id="relocURL"/>
+            </tr>
+        </table>
+        <script type="text/javascript">
+            (function () {
+                var form = document.getElementById('tool');
+                    
+                  
+                
+                form.onsubmit = function (e) {
+                    var gaHost = this['ga-host'].value,
+                        docId = this['doc-id'].value.replace('.xml', ''),
+						cfId = this['cf-id'].value,
+                        ticket = this['atlas-ticket'].value,
+                        output = document.getElementById('output'),
+                        cells = output.getElementsByTagName('td'),
+                        i,
+                        tempId,
+                        tempLink,
+                        currentURL,
+						gaURLPrefix = 'http://' + gaHost + '/document-service-webapp/atlas-document/(',
+						gaURLSuffix = ').xml?preprocessing=none&AtlasTicket=' + ticket,
+						gaRelocURLPrefix = 'http://' + gaHost + '/document-service-webapp/' + cfId + '/atlas-annotated-document/(',
+						gaRelocURLSuffix = ').xml?AtlasTicket=' + ticket;
+                        
+                    if (!gaHost || !docId || !cfId) {
+                        alert('Fill the text area(s)');
+                        return false;
+                    }
+                        
+                    e.preventDefault();
+
+
+                    for (i = 0, l = cells.length; i < l; i++) {
+                        tempId = cells[i].id;
+                        if (tempId) {
+                            
+							if (tempId.search("aicURL") != -1) {
+								currentURL = gaURLPrefix + docId + gaURLSuffix;
+							} else {
+								currentURL = gaRelocURLPrefix + docId + gaRelocURLSuffix;
+							}
+							
+                            cells[i].innerHTML = '';
+                            tempLink = document.createElement('a');
+                            tempLink.href = currentURL;
+                            tempLink.target = '_blank';
+                            tempLink.innerHTML = currentURL;
+                            cells[i].appendChild(tempLink);
+                            
+                        }
+                    }
+                };
+            })();
+        </script>
+    </body>
+</html>
