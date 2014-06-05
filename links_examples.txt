@@ -7,3 +7,7 @@ http://intelliconnect.stg.cch.com/document-service-webapp/atlas-document/(fed013
 
 view-source:http://10.208.159.50/document-service-webapp/wkusdefault/documents/(ftf0109013e2c83a60932).html?action=view&menupathInclusionStrategy=noMenuPath&searchId=3790&relatedInfoIncluded=no&cshLeafNodeIds=WKUS-TAL-DOCS-PHC-%7B557F27D0-6810-457C-A0DD-BABE0424C003%7D&tocLeafNodeIds=WKUS_TAL_426%23teid-0&inRF=0&hasAnno=0&conversationId=65&cpid=WKUS-TAA-IC&uChannelCtx=RWI&uAppCtx=RWI&anNotes=true&anHL=true&rfID=-1&anShow=true&anMode=SIDE_NOTES&anAcc=true&anFBP=false&anConf=100&anSelectedOnly=false&anScroll=false&srf=true&artFileId=TAL-ART&AtlasTicket=04F4EE62-3723-4D83-B9D9-2E3ECFAB3A47
 
+
+d:\env\projects\WKL-GLA\work\US\dps-standalone-r51\build\webapp\docs\CU-1612\sed01103e23d47b8e1000ae8500215ad7479003b5.xml
+
+http://localhost:8888/test/documents/(CU-7252/sec01e0adc4647b951000b14dd8d385ad16940bf).pdf

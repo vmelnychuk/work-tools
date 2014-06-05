@@ -1,0 +1,45 @@
+.form-label {
+    width: 150px;
+    text-align: right;
+    display:inline-block;
+    margin-right: 10px;
+}
+input[type="text"] {
+    width: 450px;
+}
+
+.dps a[href$="xml"] {
+    background: url(img/html.png);
+    background-repeat: no-repeat;
+    padding-left: 35px;
+}
+
+.dps a[href$="html"] {
+    background: url(img/xml.png);
+    background-repeat: no-repeat;
+    padding-left: 35px;
+}
+
+.dps a[href$="pdf"] {
+    background: url(img/pdf.png);
+    background-repeat: no-repeat;
+    padding-left: 35px;
+}
+
+.dps a[href$="rtf"] {
+    background: url(img/rtf.png);
+    background-repeat: no-repeat;
+    padding-left: 35px;
+}
+
+.dps a[href$="mail"] {
+    background: url(img/mail.png);
+    background-repeat: no-repeat;
+    padding-left: 35px;
+}
+
+.dps a[href$="print"] {
+    background: url(img/print.png);
+    background-repeat: no-repeat;
+    padding-left: 35px;
+}
